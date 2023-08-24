@@ -1,0 +1,58 @@
+<style type="text/css">
+
+</style>
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ejemplo</title>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Ejemplo</h1>
+</header>
+<h1 id="ejemplo-de-reproducción-del-error.">Ejemplo de reproducción del
+error.</h1>
+
+<div id="javier_notebook_1">
+</div>
+
+<script src="https://jsvine.github.io/nbpreview/js/vendor/es5-shim.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/marked.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/purify.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/ansi_up.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/prism.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/katex.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/katex-auto-render.min.js"></script>
+<script src="https://jsvine.github.io/nbpreview/js/vendor/notebook.min.js"></script>
+
+<script>
+    var sheet = document.createElement('style')
+    sheet.innerHTML = `
+    @import url('https://jsvine.github.io/nbpreview/css/vendor/katex.min.css');
+    @import url('https://jsvine.github.io/nbpreview/css/vendor/prism.css');
+    @import url('https://jsvine.github.io/nbpreview/css/notebook.css');
+    @import url('https://jsvine.github.io/nbpreview/css/nbpreview.css');
+`;
+
+    document.body.appendChild(sheet);
+    let url = 'https://gist.githubusercontent.com/jjclavijo/4053c0e107f8211df226450bfddd7653/raw/b50d8161d1de62cfecff23caff6a42390e974320/scratchpad.ipynb';
+
+    fetch(url)
+        .then(res => res.json())
+        .then(out => nb.parse(out))
+        .then(notebook => notebook.render())
+        .then(rendered => document
+            .getElementById("javier_notebook_1")
+            .appendChild(rendered))
+        .catch(err => {
+            throw err
+        });
+</script>
+
+</body>
+</html>
