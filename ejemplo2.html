@@ -21,13 +21,19 @@ error.</h1>
 <div id="javier_notebook_1">
 </div>
 
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
 <script src="https://jsvine.github.io/nbpreview/js/vendor/es5-shim.min.js"></script>
 <script src="https://jsvine.github.io/nbpreview/js/vendor/marked.min.js"></script>
 <script src="https://jsvine.github.io/nbpreview/js/vendor/purify.min.js"></script>
 <script src="https://jsvine.github.io/nbpreview/js/vendor/ansi_up.min.js"></script>
 <script src="https://jsvine.github.io/nbpreview/js/vendor/prism.min.js"></script>
-<script src="https://jsvine.github.io/nbpreview/js/vendor/katex.min.js"></script>
-<script src="https://jsvine.github.io/nbpreview/js/vendor/katex-auto-render.min.js"></script>
 <script src="https://jsvine.github.io/nbpreview/js/vendor/notebook.min.js"></script>
 
 <script>
@@ -40,7 +46,23 @@ error.</h1>
 `;
 
     document.body.appendChild(sheet);
+
     let url = 'https://gist.githubusercontent.com/jjclavijo/4053c0e107f8211df226450bfddd7653/raw/b50d8161d1de62cfecff23caff6a42390e974320/scratchpad.ipynb';
+
+    let loadmath = function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    };
 
     fetch(url)
         .then(res => res.json())
@@ -49,9 +71,12 @@ error.</h1>
         .then(rendered => document
             .getElementById("javier_notebook_1")
             .appendChild(rendered))
+        .then(_ => loadmath())
         .catch(err => {
             throw err
         });
+
+
 </script>
 
 </body>
